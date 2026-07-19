@@ -8,6 +8,12 @@ function ProductCard({ product }) {
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
 
+  const imageUrl = product.image
+    ? product.image.startsWith("http")
+      ? product.image
+      : `http://localhost:5000${product.image}`
+    : "https://placehold.co/400x400?text=No+Image";
+
   return (
     <div className="overflow-hidden rounded-2xl bg-white shadow-md transition duration-300 hover:-translate-y-1 hover:shadow-xl">
 
@@ -15,7 +21,7 @@ function ProductCard({ product }) {
       <div className="relative">
         <Link to={`/product/${product.id}`}>
           <img
-            src={product.image}
+            src={imageUrl}
             alt={product.name}
             className="h-64 w-full object-cover"
           />
@@ -27,7 +33,7 @@ function ProductCard({ product }) {
           className="absolute right-4 top-4 rounded-full bg-white p-2 shadow-md transition hover:scale-110"
         >
           {isInWishlist(product.id) ? (
-            <FaHeart className="text-red-500 text-lg" />
+            <FaHeart className="text-lg text-red-500" />
           ) : (
             <FiHeart className="text-lg" />
           )}

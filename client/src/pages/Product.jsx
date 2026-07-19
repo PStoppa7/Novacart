@@ -1,15 +1,44 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import products from "../data/products";
+import axios from "axios";
 import { FiShoppingCart, FiStar } from "react-icons/fi";
+
 import { useCart } from "../context/CartContext";
 
 function Product() {
   const { id } = useParams();
+
   const { addToCart } = useCart();
 
-  const product = products.find(
-    (p) => p.id === Number(id)
-  );
+  const [product, setProduct] = useState(null);
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchProduct();
+  }, [id]);
+
+  async function fetchProduct() {
+    try {
+      const res = await axios.get(
+        `http://localhost:5000/api/products/${id}`
+      );
+
+      setProduct(res.data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  if (loading) {
+    return (
+      <h1 className="p-10 text-3xl">
+        Loading...
+      </h1>
+    );
+  }
 
   if (!product) {
     return (
@@ -23,7 +52,13 @@ function Product() {
     <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-2">
 
       <img
-        src={product.image}
+        src={
+          product.image
+            ? product.image.startsWith("http")
+              ? product.image
+              : `http://localhost:5000${product.image}`
+            : "https://placehold.co/600x600?text=No+Image"
+        }
         alt={product.name}
         className="w-full rounded-2xl shadow-lg"
       />
@@ -40,7 +75,7 @@ function Product() {
 
         <div className="mt-4 flex items-center gap-2">
           <FiStar className="text-yellow-500" />
-          {product.rating}
+          {product.rating || 5}
         </div>
 
         <h2 className="mt-6 text-4xl font-bold text-blue-600">
@@ -48,8 +83,8 @@ function Product() {
         </h2>
 
         <p className="mt-8 text-gray-600">
-          Premium quality product designed for
-          performance, durability, and style.
+          {product.description ||
+            "Premium quality product designed for performance, durability, and style."}
         </p>
 
         <button

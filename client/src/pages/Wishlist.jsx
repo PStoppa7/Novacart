@@ -11,7 +11,9 @@ function Wishlist() {
       </h1>
 
       {wishlistItems.length === 0 ? (
-        <p className="text-gray-500">Your wishlist is empty.</p>
+        <p className="text-gray-500">
+          Your wishlist is empty.
+        </p>
       ) : (
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {wishlistItems.map((product) => (
