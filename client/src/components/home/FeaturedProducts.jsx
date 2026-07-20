@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+
+import api from "../../services/api";
 
 import ProductCard from "./ProductCard";
 import SectionTitle from "../common/SectionTitle";
@@ -13,7 +14,7 @@ function FeaturedProducts() {
 
   async function fetchProducts() {
     try {
-      const res = await axios.get("http://localhost:5000/api/products");
+      const res = await api.get("/products");
       setProducts(res.data);
     } catch (err) {
       console.error("Failed to fetch products:", err);

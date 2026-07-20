@@ -1,3 +1,5 @@
+const API_URL = "https://novacart-api-ferw.onrender.com";
+
 export default function getImageUrl(image) {
   if (!image) {
     return "https://placehold.co/400x400?text=No+Image";
@@ -7,5 +9,5 @@ export default function getImageUrl(image) {
     return image;
   }
 
-  return `http://localhost:5000${image}`;
+  return `${API_URL}${image}`;
 }

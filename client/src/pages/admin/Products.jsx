@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api";
 
 import AdminButton from "../../components/admin/AdminButton";
 import SearchBar from "../../components/admin/SearchBar";

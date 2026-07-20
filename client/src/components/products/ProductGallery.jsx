@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-const API_URL = "http://localhost:5000";
+const API_URL = "https://novacart-api-ferw.onrender.com";
 
 export default function ProductGallery({ images = [] }) {
   const [selected, setSelected] = useState(null);

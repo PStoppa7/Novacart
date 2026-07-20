@@ -8,12 +8,13 @@ function ProductCard({ product }) {
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
 
-  const imageUrl = product.image
-    ? product.image.startsWith("http")
-      ? product.image
-      : `http://localhost:5000${product.image}`
-    : "https://placehold.co/400x400?text=No+Image";
+  const API_URL = "https://novacart-api-ferw.onrender.com";
 
+const imageUrl = product.image
+  ? product.image.startsWith("http")
+    ? product.image
+    : `${API_URL}${product.image}`
+  : "https://placehold.co/400x400?text=No+Image";
   return (
     <div className="overflow-hidden rounded-2xl bg-white shadow-md transition duration-300 hover:-translate-y-1 hover:shadow-xl">
 
