@@ -6,9 +6,7 @@ import {
 } from "../context/LoadingContext";
 
 const api = axios.create({
-
-  baseURL: "http://localhost:5000/api",
-
+  baseURL: "https://novacart-api-ferw.onrender.com/api",
 });
 
 api.interceptors.request.use(
